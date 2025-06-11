@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alexandre Charchar | Portfolio</title>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Inline CSS (all‑in‑one file) -->
+  <style>
+    :root {
+      --accent: #10b981; /* emerald */
+      --bg-start: #0f0c29;
+      --bg-mid:   #302b63;
+      --bg-end:   #24243e;
+      --text-light: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      line-height:1.6;
+      color:var(--text-light);
+      background:linear-gradient(135deg,var(--bg-start),var(--bg-mid) 50%,var(--bg-end));
+      min-height:100vh;
+      scroll-behavior:smooth;
+    }
+    a{color:var(--accent);text-decoration:none;transition:0.3s}
+    a:hover{color:#34d399}
+    header{
+      position:fixed;top:0;left:0;right:0;backdrop-filter:blur(10px);
+      background-color:rgba(255,255,255,0.05);
+      box-shadow:0 2px 10px rgba(0,0,0,0.2);
+      z-index:100;
+    }
+    nav{max-width:1100px;margin:auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-links{display:flex;gap:1.5rem;font-size:0.9rem;}
+    .nav-links a{color:var(--text-light)}
+    /* Hamburger for mobile */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+    .hamburger span{width:25px;height:3px;background:var(--text-light);transition:0.3s}
+    /* Hero */
+    #hero{padding:140px 1.5rem 100px;text-align:center;}
+    .hero-title{font-size:clamp(2.5rem,6vw,4rem);font-weight:700;background:linear-gradient(90deg,#34d399,#06b6d4);-webkit-background-clip:text;color:transparent;}
+    .hero-sub{margin-top:1rem;font-size:clamp(1.1rem,2.5vw,1.4rem);color:var(--text-muted)}
+    .btn{display:inline-block;margin:1.5rem 0.5rem;padding:0.7rem 1.8rem;border-radius:30px;font-weight:600;border:2px solid var(--accent);transition:0.3s}
+    .btn-primary{background:var(--accent);color:#fff;}
+    .btn-primary:hover{background:#059669;border-color:#059669}
+    .btn-outline{color:var(--accent)}
+    .btn-outline:hover{background:rgba(16,185,129,0.1)}
+    /* Sections */
+    section{padding:80px 1.5rem;max-width:1100px;margin:auto;}
+    h2.section-title{font-size:2rem;margin-bottom:2.5rem;text-align:center;position:relative;}
+    h2.section-title::after{content:"";display:block;width:60px;height:3px;margin:8px auto 0;background:var(--accent);border-radius:3px;}
+    /* About */
+    #about p{max-width:800px;margin:auto;font-size:1.05rem;color:var(--text-muted);}
+    /* Skills */
+    .skills-grid{display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;}
+    .skill-tag{padding:0.5rem 1rem;font-size:0.85rem;background:rgba(255,255,255,0.07);border-radius:9999px;transition:0.3s}
+    .skill-tag:hover{transform:translateY(-3px);background:rgba(16,185,129,0.2)}
+    /* Projects */
+    .projects-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+    .project-card{background:rgba(255,255,255,0.05);padding:1.5rem;border-radius:16px;box-shadow:0 6px 15px rgba(0,0,0,0.25);transition:0.35s}
+    .project-card:hover{transform:translateY(-6px);box-shadow:0 10px 20px rgba(0,0,0,0.35)}
+    .project-tech{font-size:0.75rem;text-transform:uppercase;color:var(--accent);margin:0.8rem 0}
+    /* Timeline */
+    .timeline{border-left:3px solid var(--accent);padding-left:1.5rem;}
+    .timeline-item{position:relative;margin-bottom:2rem;}
+    .timeline-item::before{content:"";position:absolute;left:-11px;top:4px;width:12px;height:12px;background:var(--accent);border-radius:50%;}
+    .timeline-item h4{font-weight:600;margin-left:0.35rem;}
+    .timeline-item span{font-size:0.85rem;color:var(--text-muted)}
+    .timeline-item ul{margin-top:0.5rem;padding-left:1.2rem;list-style:disc;}
+    .timeline-item li{font-size:0.9rem;color:var(--text-muted);margin-bottom:0.3rem;}
+    /* Contact */
+    .contact-flex{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;font-size:0.95rem;}
+    /* Footer */
+    footer{text-align:center;padding:2rem 1.5rem;font-size:0.8rem;color:var(--text-muted)}
+    /* Responsive */
+    @media(max-width:768px){
+      .nav-links{position:fixed;inset:0 0 0 40%;background:rgba(15,12,41,0.95);flex-direction:column;align-items:center;justify-content:center;transform:translateX(100%);transition:0.4s}
+      .nav-links.open{transform:none}
+      .hamburger{display:flex}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="#hero" class="hero-logo" style="font-weight:700;font-size:1.1rem;color:#fff">Alexandre</a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero">
+    <h1 class="hero-title">Alexandre Charchar</h1>
+    <p class="hero-sub">Network Administrator &amp; Automation Enthusiast</p>
+    <div>
+      <a href="#contact" class="btn btn-primary">Hire Me</a>
+      <a href="https://github.com/AlexCharchar" target="_blank" class="btn btn-outline">GitHub</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <p>I’m a Montreal‑based IT professional with a passion for building secure, scalable network environments and automating infrastructure with Python and Ansible. I thrive at the intersection of networking &amp; software, turning complex problems into elegant, reliable solutions. Outside of tech I coach Volleyball and sharpen fades as a barber—balance and people skills matter!</p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <span class="skill-tag">Linux</span>
+      <span class="skill-tag">Windows Server</span>
+      <span class="skill-tag">DNS</span>
+      <span class="skill-tag">DHCP</span>
+      <span class="skill-tag">VPN</span>
+      <span class="skill-tag">Routing</span>
+      <span class="skill-tag">VMware</span>
+      <span class="skill-tag">Active Directory</span>
+      <span class="skill-tag">Wireshark</span>
+      <span class="skill-tag">Apache</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Bash</span>
+      <span class="skill-tag">SQL</span>
+      <span class="skill-tag">Ansible</span>
+      <span class="skill-tag">Git</span>
+      <span class="skill-tag">Machine Learning</span>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <a href="Final_Practical_Exam.pdf" target="_blank" style="text-decoration: none; color: inherit;">
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Multi‑Site Web Hosting</h3>
+        <p class="project-tech">Apache · Linux · Firewall</p>
+        <p>Secure, multi‑website hosting on Apache with granular access controls, DNS integration and robust routing.
+          Verified restricted access using browser tests and command‑line <em>curl</em>.</p>
+      </div>
+    </a>
+      <a href="network_automation.pdf" target="_blank" style="text-decoration: none; color: inherit;">
+      <div class="project-card">
+        <h3>Network Automation Lab</h3>
+        <p class="project-tech">Python · GNS3 · Cisco IOS</p>
+        <p>Designed a complex virtual network topology in GNS3 and automated switch provisioning with Python scripts—pushed VLANs &amp; hostnames at scale via SSH.</p>
+      </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>Solution Developer @ Deloitte</h4>
+        <span>2022 – 2023 · Montreal</span>
+        <ul>
+          <li>Supported the deployment and configuration of enterprise software solutions for internal and client-facing platforms.</li>
+          <li>Helped integrate new product features through system testing, coordination with developers, and stakeholder feedback.</li>
+          <li>Created clear and effective technical documentation, including user guides, workflow diagrams, and system specifications.</li>
+          <li>Identified opportunities for system improvement by researching emerging technologies and presenting findings to senior staff.</li>
+          <li>Collaborated with business analysts and developers to turn functional requirements into well-scoped, actionable tasks.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h4>Head Coach @ CSSMB</h4>
+        <span>2017 – 2024 · Pointe‑Claire</span>
+        <ul>
+          <li>Evaluated individual and team performance to guide personalized development strategies.</li>
+          <li>Designed strategic game plans to maximize team strengths and address weaknesses.</li>
+          <li>Led structured training sessions and supervised team practices.</li>
+          <li>Mentored students and coordinated activities to foster discipline and teamwork.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h4>Barber @ D1 Barbershop</h4>
+        <span>2021 – 2022 · St‑Henri</span>
+        <ul>
+          <li>Consulted with clients on desired styles and provided personalized grooming services.</li>
+          <li>Adapted to diverse client needs using active listening and clear communication.</li>
+          <li>Supervised apprentices and ensured proper sanitization of tools and workspace.</li>
+          <li>Performed precision cuts, beard shaping, and hair treatments in a high-traffic environment.</li>
+        </ul>
+        </div>
+        <div class="timeline-item">
+        <h4>Cash Supervisor @ Canadian Tire</h4>
+        <span>2018 – 2021 · Kirkland</span>
+        <ul>
+          <li>Supervised cashier team and coordinated daily operations.</li>
+          <li>Assigned work schedules and supported staff in meeting performance goals.</li>
+          <li>Handled customer complaints, returns, and issue resolution efficiently.</li>
+          <li>Trained new employees and led store opening/closing procedures.</li>
+        </ul>
+        </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>AEC in IT – Network Administration</h4>
+        <span>John Abbott College · Expected Dec 2025</span>
+        <ul>
+          <li>Gained hands-on experience configuring Windows Server and Linux environments, including user access, file systems, and network services.</li>
+          <li>Built and managed DNS, DHCP, Apache, and VPN services in lab-based network infrastructures.</li>
+          <li>Implemented static and dynamic routing on Cisco routers and switches, with subnetting and redundancy features.</li>
+          <li>Automated infrastructure tasks using Ansible, and used Python scripting to configure and manage network devices over SSH.</li>
+          <li>Developed and applied Group Policy Objects (GPO), Certificate Authorities, and Active Directory domain services.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h4>Diploma in Data Science</h4>
+        <span>Concordia University · 2022</span>
+        <ul>
+          <li>Trained in Python, SQL, Pandas, and Scikit-learn for data wrangling, visualization, and statistical analysis.</li>
+          <li>Applied machine learning methods like regression, classification, and time-series forecasting.</li>
+          <li>Completed projects involving data collection, model building, and performance evaluation using TensorFlow and Statsmodels.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-flex">
+      <p>📞 +1 (514) 561‑5596</p>
+      <p>✉️ <a href="mailto:alexcharchar@hotmail.ca">alexcharchar@hotmail.ca</a></p>
+      <p>🔗 <a href="https://www.linkedin.com/in/alexcharchar" target="_blank">LinkedIn</a></p>
+      <p>💻 <a href="https://github.com/AlexCharchar" target="_blank">GitHub</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © <span id="year"></span> Alexandre Charchar — Made with ❤️
+  </footer>
+
+  <!-- Tiny Script for year & mobile nav -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', ()=>{
+      navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
